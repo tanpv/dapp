@@ -1,6 +1,7 @@
+/**
+ * configure blockchain will be used
+ */
 module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
-  // for more about customizing your Truffle configuration!
   networks: {
     development: {
       host: "127.0.0.1",
