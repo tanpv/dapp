@@ -60,7 +60,7 @@ app.address --> contract address
 
 explain gas on ganache account
 
-## Smart contract structure
+## Develop smart contract 
 
 candidate structure
 
@@ -74,6 +74,24 @@ add candidate function --> explain private, public
 
 vote function
 
+
+
+how to explain msg.sender from log ?
+
+explain msg.sender
+
+**instance.vote(1).then(function(ret){console.log(ret.logs[0].args.voter);})**
+
+
+
+how to change msg.sender ?
+
+explain web3.eth.accounts and web3.eth.accounts[0]
+
+
+
+
+
 ## Smart contract automation testing
 
 mocha and chai
@@ -85,6 +103,8 @@ truffle test --> running test
 ## Front end
 
 front end structure and code
+
+explain Election.json
 
 web3js and communication with blockchain
 

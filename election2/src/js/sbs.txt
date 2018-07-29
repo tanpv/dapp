@@ -1,0 +1,15 @@
+- the big picture and installation
+- start dapp project
+  - truffle unbox petshop
+- develop smart contract
+  - design contract component
+  - code
+  - interact with deployed smart contract by truffle console
+    - get contract instance
+    - show contract address
+- auomation test smart contract
+- layout frontend
+- interaction between blockchain and frontend
+- deploy to test network
+- using ipfs for full decentralization
+- bonus : using react to develop front end
