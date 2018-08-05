@@ -1,43 +1,54 @@
-- the big picture and installation
+- the big picture
+  - ethereum network
+  - webapp in server model and distributed model
+  - what will be built and why election is good app on blockchain
 
-- start dapp project
-  - truffle unbox petshop
+- installation
+  - install node
+  - install truffle framewrok
+  - install metamask
+  - install visual studio code, install plugin
+
+- start dapp project which
+  - start the project from nothig -->   truffle init
+  - get some from other app -->         truffle unbox petshop
 
 - develop smart contract
-
   - design contract component
-    - data
-    - function
-    - event
+    - data for app
+    - function for app
+    - event for communicate with
 
-  - coding smart contract
+  - code and try to interact with smart contract from truffle console
+    - get contract instance -->     Election.deployed().then(function(i){instance=i})
+    - show contract address -->     instance.address
+    - get candidate count -->       instance.candidatesCount().then(function(count){vcount=count})
+    - do vote using user 0 -->      web3.eth.accounts[0] --> instance.vote(1)
+    - see voter by address -->      instance.voters(web3.eth.accounts[0])
+    - see candidate name -->        instance.candidates(1).then(function(candidate){name=candidate[1]})
+    - vote with other voter -->     instance.vote(1, {from:web3.eth.accounts[2]})
+    - event -->                     instance.vote(1, {from:web3.eth.accounts[8]}).then(function(result){console.log(result.logs[0].args._candidateId)})
 
-  - interact with smart contract from truffle console
-    - get contract instance --> Election.deployed().then(function(i){instance=i})
-    - show contract address --> instance.address
-    - get candidate count --> instance.candidatesCount().then(function(count){vcount=count})
-    - do vote using user 0 --> web3.eth.accounts[0] --> instance.vote(1)
-    - see voter by address --> instance.voters(web3.eth.accounts[0])
-    - see candidate name --> instance.candidates(1).then(function(candidate){name=candidate[1]})
-    - vote with other voter --> instance.vote(1, {from:web3.eth.accounts[2]})
-    - event --> instance.vote(1, {from:web3.eth.accounts[8]}).then(function(result){console.log(result.logs[0].args._candidateId)})
-    - unlock account --> personal.unlockAccount(eth.accounts[0])
-
-
-- auomation test smart contract
+- automation test smart contract
     - contract test structure
+
 - layout frontend    
 - interaction between blockchain and frontend
 
 - geth node
-  - start node use rinkeby network ---> geth --rinkeby
-  - attach to console javascript ---> geth attach ipc:\\.\pipe\geth.ipc
-  - 
+  - start node use rinkeby network --->               geth --rinkeby
+  - attach to console javascript --->                 geth attach ipc:\\.\pipe\geth.ipc
+  - create new account -->                            personal.NewAccount()
+  - list account -->                                  eth.accounts
+  - check account balance with console -->            eth.getBalance(eth.accounts[0])
+  - check account balance and convert to ether -->    web3.fromWei(eth.getBalance(eth.accounts[0]),"ether")
+  - unlock account before deploy to test network -->  personal.unlockAccount(eth.accounts[0])
+  - check syncing status (need to wait until all sync complete) --> eth.syncing (should return false)
 
 - deploy to test network use rinkepy
   - scan information ---->  https://rinkeby.etherscan.io
   - improt account ----> C:\Users\TAN\AppData\Roaming\Ethereum\rinkeby\keystore
-  - deploy ----> truffle migrate --reset --compile-all --network rinkeby
+  - deploy to rinkeby network after unlock ----> truffle migrate --reset --compile-all --network rinkeby
 
 bonus:
 - deploy to test network use infura
