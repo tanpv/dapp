@@ -134,14 +134,19 @@ App = {
 
   castVote: function() {
     var candidateId = $('#candidatesSelect').val();
+    console.log(candidateId)
+    // candidateId = 2
     App.contracts.Election.deployed().then(function(instance) {
       return instance.vote(candidateId, { from: App.account });
     }).then(function(result) {
       // Wait for votes to update
+      console.clear()
+      console.log(candidateId)
+      console.log(result)
       $("#content").hide();
       $("#loader").show();
     }).catch(function(err) {
-      console.error(err);
+      console.log(err)
     });
   }
 };
@@ -151,3 +156,110 @@ $(function() {
     App.init();
   });
 });
+
+// put all app logic code inside class
+// App = {
+
+//   contracts : {},
+
+//   // init blockchain for web3
+//   init : function () {
+//     // console.log(web3);
+
+//     // when already define
+//     if (typeof web3 !== 'undefined') {
+//       web3 = new Web3(web3.currentProvider);
+//     // when not yet define
+//     } else {
+//       // set the provider you want from Web3.providers
+//       web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+//     }
+    
+//     return App.initContract();
+//   },
+
+//   initContract : function(){
+//     // read json contract file
+//     // create truffle-contract object
+//     // set provider for contract
+//     $.getJSON("Election.json", function(election){
+//       // console.log(election);
+//       App.contracts.Election = TruffleContract(election);
+//       App.contracts.Election.setProvider(web3.currentProvider);
+//       console.log(App.contracts.Election);
+//       // because the code of render should only call when contract is ready
+//       App.listentEvent();
+//       return App.render();
+//     });
+//   },
+  
+//   listentEvent : function() {
+//     App.contracts.Election.deployed().then(function(instance){
+//       instance.voteEvent({}, {fromBlock: 0,toBlock: 'latest'}).watch(function(error, result){
+//         console.log('event happen');
+//         App.render();
+//       })
+//     })
+//   },
+
+//   render : function(){
+//     // render current account
+//     web3.eth.getCoinbase(function(error, account){
+//       console.log(account);
+//       $('#accountAddress').html("your account : " + account);
+//     });
+
+//     // render current candidate
+//     var candidatesResults = $("#candidatesResults");
+//     candidatesResults.empty();
+//     var candidatesSelect = $("#candidatesSelect");
+//     candidatesSelect.empty();
+//     App.contracts.Election.deployed().then(function(i){
+//       instance = i;
+//       return instance.candidatesCount();
+//     }).then(function(count){
+//       for(var i=1; i<= count; i++){
+//         // return of promise
+//         instance.candidates(i).then(function(candidate){
+          
+//           var id = candidate[0];
+//           var name = candidate[1];
+//           var voteCount = candidate[2];
+          
+//           console.log(id);
+//           console.log(name);
+//           console.log(voteCount);
+          
+//           var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td></tr>"
+//           candidatesResults.append(candidateTemplate);
+          
+//           var candidateOption = "<option value='" + id + "' >" + name + "</ option>"
+//           candidatesSelect.append(candidateOption);
+//         })
+//       }
+//     });
+//   },
+
+//   // handle vote
+//   // http://solidity.readthedocs.io/en/develop/contracts.html#events
+//   vote : function(){
+//     console.log('vote happen');
+//     var candidateId = $('#candidatesSelect').val();
+//     console.log(candidateId);
+//     App.contracts.Election.deployed().then(function(i) {
+//       instance = i;
+//       return instance.vote(candidateId);
+//     }).then(function(result){
+//       console.log(result);
+//     });
+//   }
+// };
+
+// // when document is ready for use
+// $(function(){
+//   // when windows is load ready
+//   // using callback way
+//   $(window).load(function() {
+//     App.init();
+//   });
+// })

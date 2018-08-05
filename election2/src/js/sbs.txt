@@ -1,15 +1,45 @@
 - the big picture and installation
+
 - start dapp project
   - truffle unbox petshop
+
 - develop smart contract
+
   - design contract component
-  - code
-  - interact with deployed smart contract by truffle console
-    - get contract instance
-    - show contract address
+    - data
+    - function
+    - event
+
+  - coding smart contract
+
+  - interact with smart contract from truffle console
+    - get contract instance --> Election.deployed().then(function(i){instance=i})
+    - show contract address --> instance.address
+    - get candidate count --> instance.candidatesCount().then(function(count){vcount=count})
+    - do vote using user 0 --> web3.eth.accounts[0] --> instance.vote(1)
+    - see voter by address --> instance.voters(web3.eth.accounts[0])
+    - see candidate name --> instance.candidates(1).then(function(candidate){name=candidate[1]})
+    - vote with other voter --> instance.vote(1, {from:web3.eth.accounts[2]})
+    - event --> instance.vote(1, {from:web3.eth.accounts[8]}).then(function(result){console.log(result.logs[0].args._candidateId)})
+    - unlock account --> personal.unlockAccount(eth.accounts[0])
+
+
 - auomation test smart contract
-- layout frontend
+    - contract test structure
+- layout frontend    
 - interaction between blockchain and frontend
-- deploy to test network
+
+- geth node
+  - start node use rinkeby network ---> geth --rinkeby
+  - attach to console javascript ---> geth attach ipc:\\.\pipe\geth.ipc
+  - 
+
+- deploy to test network use rinkepy
+  - scan information ---->  https://rinkeby.etherscan.io
+  - improt account ----> C:\Users\TAN\AppData\Roaming\Ethereum\rinkeby\keystore
+  - deploy ----> truffle migrate --reset --compile-all --network rinkeby
+
+bonus:
+- deploy to test network use infura
 - using ipfs for full decentralization
-- bonus : using react to develop front end
+- using react to develop front end
